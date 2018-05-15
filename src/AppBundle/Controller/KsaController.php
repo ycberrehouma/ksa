@@ -16,4 +16,13 @@ class KsaController extends Controller
         // replace this example code with whatever you need
         return $this->render('main/index.twig');
     }
+
+    /**
+     * @Route("/database", name="database")
+     */
+    public function databaseAction(Request $request)
+    {
+        // replace this example code with whatever you need
+        return $this->render('database/database.twig');
+    }
 }
