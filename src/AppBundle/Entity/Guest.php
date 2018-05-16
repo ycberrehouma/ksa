@@ -101,7 +101,7 @@ class Guest
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="created_on", type="date")
+     * @ORM\Column(name="created_on", type="datetime")
      */
     private $createdOn;
 

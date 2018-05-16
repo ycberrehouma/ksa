@@ -23,16 +23,24 @@
         </thead>
         <tbody>
 
-        <h2 class="page-header">Task List</h2>
+        <h2 class="page-header">Guest List</h2>
 
 
-        {% for message in messages %}
+        {% for guest in guests %}
             <tr>
-                <th scope="row">{{ message.id }}</th>
-                <td>{{ message.fullName }}</td>
-                <td>{{ message.emailAddress }}</td>
-                <td>{{ message.message }}</td>
-                <td>{{ message.date|date('F j, Y, g:i a')  }}</td>
+                <th scope="row">{{ guest.id }}</th>
+                <td>{{ guest.firstName }}</td>
+                <td>{{ guest.lastName }}</td>
+                <td>{{ guest.dateOfBirth|date('F j, Y, g:i a')  }}</td>
+                <td>{{ guest.gender }}</td>
+                <td>{{ guest.phoneNumber }}</td>
+                <td>{{ guest.emailAddress }}</td>
+                <td>{{ guest.guestsNumber }}</td>
+                <td>{{ guest.checkInDate|date('F j, Y, g:i a')  }}</td>
+                <td>{{ guest.checkOutDate|date('F j, Y, g:i a')  }}</td>
+                <td>{{ guest.comment }}</td>
+                <td>{{ guest.price }}</td>
+                <td>{{ guest.createdOn|date('F j, Y, g:i a')  }}</td>
             </tr
         {% endfor %}
 
