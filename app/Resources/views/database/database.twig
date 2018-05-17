@@ -2,7 +2,7 @@
 
 {% block body %}
 
-    <table class="table table-striped" id="ReservationTable">
+    <table id="example" class="display" style="width:100%">
         <thead>
         <tr>
             <th>#</th>
@@ -18,7 +18,6 @@
             <th>Price</th>
             <th>Comment</th>
             <th>Date Create On</th>
-            <th>&nbsp;</th>
         </tr>
         </thead>
         <tbody>
@@ -31,17 +30,17 @@
                 <th scope="row">{{ guest.id }}</th>
                 <td>{{ guest.firstName }}</td>
                 <td>{{ guest.lastName }}</td>
-                <td>{{ guest.dateOfBirth|date('F j, Y, g:i a')  }}</td>
+                <td>{{ guest.dateOfBirth|date('F j, Y')  }}</td>
                 <td>{{ guest.gender }}</td>
                 <td>{{ guest.phoneNumber }}</td>
                 <td>{{ guest.emailAddress }}</td>
                 <td>{{ guest.guestsNumber }}</td>
-                <td>{{ guest.checkInDate|date('F j, Y, g:i a')  }}</td>
-                <td>{{ guest.checkOutDate|date('F j, Y, g:i a')  }}</td>
+                <td>{{ guest.checkInDate|date('F j, Y')  }}</td>
+                <td>{{ guest.checkOutDate|date('F j, Y')  }}</td>
                 <td>{{ guest.comment }}</td>
                 <td>{{ guest.price }}</td>
                 <td>{{ guest.createdOn|date('F j, Y, g:i a')  }}</td>
-            </tr
+            </tr>
         {% endfor %}
 
 
@@ -49,5 +48,7 @@
     </table>
 
 
+    {% block javascripts %}
 
+    {% endblock %}
 {% endblock %}

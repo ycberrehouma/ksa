@@ -41,7 +41,7 @@ class KsaController extends Controller
             $Guest->setCheckOutDate($check_out_date);
             $Guest->setPrice($price);
             $Guest->setComment($comment);
-            $Guest->setCreatedOn($now);
+           $Guest->setCreatedOn($now);
 
             $em = $this->getDoctrine()->getManager();
 

@@ -36,9 +36,9 @@ class Guest
     private $lastName;
 
     /**
-     * @var \DateTime
+     * @var \String
      *
-     * @ORM\Column(name="date_of_birth", type="date")
+     * @ORM\Column(name="date_of_birth", type="string", length=35)
      */
     private $dateOfBirth;
 
@@ -71,16 +71,16 @@ class Guest
     private $guestsNumber;
 
     /**
-     * @var \DateTime
+     * @var \String
      *
-     * @ORM\Column(name="check_in_date", type="date")
+     * @ORM\Column(name="check_in_date", type="string", length=35)
      */
     private $checkInDate;
 
     /**
-     * @var \DateTime
+     * @var \String
      *
-     * @ORM\Column(name="check_out_date", type="date")
+     * @ORM\Column(name="check_out_date", type="string", length=35)
      */
     private $checkOutDate;
 
@@ -167,7 +167,7 @@ class Guest
     /**
      * Set dateOfBirth
      *
-     * @param \DateTime $dateOfBirth
+     * @param \String $dateOfBirth
      *
      * @return Guest
      */
@@ -181,7 +181,7 @@ class Guest
     /**
      * Get dateOfBirth
      *
-     * @return \DateTime
+     * @return \String
      */
     public function getDateOfBirth()
     {
@@ -287,7 +287,7 @@ class Guest
     /**
      * Set checkInDate
      *
-     * @param \DateTime $checkInDate
+     * @param \String $checkInDate
      *
      * @return Guest
      */
@@ -301,7 +301,7 @@ class Guest
     /**
      * Get checkInDate
      *
-     * @return \DateTime
+     * @return \String
      */
     public function getCheckInDate()
     {
@@ -311,7 +311,7 @@ class Guest
     /**
      * Set checkOutDate
      *
-     * @param \DateTime $checkOutDate
+     * @param \String $checkOutDate
      *
      * @return Guest
      */
@@ -325,7 +325,7 @@ class Guest
     /**
      * Get checkOutDate
      *
-     * @return \DateTime
+     * @return \String
      */
     public function getCheckOutDate()
     {
