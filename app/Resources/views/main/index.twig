@@ -2,13 +2,12 @@
 {% block body %}
 
 <div class="container" id="container-form">
-    <h1 style="text-align: center; margin-bottom:5%">Welcome</h1>
 
     <form class="well form-horizontal" action="{{ path('homepage') }}" method="post"  id="contact_form">
         <fieldset>
 
             <!-- Form Name -->
-            <legend>Account Information</legend>
+            <legend>Enter Guest Information</legend>
 
 
 
@@ -50,7 +49,11 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-transgender"></i></span>
-                        <input name="gender" placeholder="Gender" class="form-control" type="text">
+                        <select name="gender" class="form-control selectpicker" >
+                            <option value=" " >Please select the gender</option>
+                            <option value="M">Male</option>
+                            <option value="F">Female</option>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -148,7 +151,7 @@
             <div class="form-group">
                 <label class="col-md-4 control-label"></label>
                 <div class="col-md-4">
-                    <button type="submit" name="submit" class="btn btn-warning" >Send <span class="glyphicon glyphicon-send"></span></button>
+                    <button type="submit" name="submit" class="btn btn-primary btn-lg btn-block" >Send <span class="glyphicon glyphicon-send"></span></button>
                 </div>
             </div>
 
@@ -174,44 +177,39 @@
                             min: 2,
                         },
                         notEmpty: {
-                            message: "What's your first name?"
+                            message: "What's the first name?"
                         }
                     }
                 },
-                middle_initial: {
-                    validators: {
-                        stringLength: {
-                            max: 1,
-                        },
-                        notEmpty: {
-                            message: "What's your middle initial?"
-                        }
-                    }
-                },
+
                 last_name: {
                     validators: {
                         stringLength: {
                             min: 2,
                         },
                         notEmpty: {
-                            message: "What's your last name?"
+                            message: "What's the last name?"
                         }
                     }
                 },
-                email_address: {
+                date_of_birth: {
                     validators: {
                         notEmpty: {
-                            message: "you'll use this when you log in and if you ever need to reset your password"
-                        },
-                        emailAddress: {
-                            message: 'Please supply a valid email address'
+                            message: 'Please supply the date of birth'
+                        }
+                    }
+                },
+               gender: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please select a gender'
                         }
                     }
                 },
                 phone_number: {
                     validators: {
                         notEmpty: {
-                            message: 'Please supply your phone number'
+                            message: 'Please supply a phone number'
                         },
                         phone: {
                             country: 'US',
@@ -219,6 +217,45 @@
                         }
                     }
                 },
+                email_address: {
+                    validators: {
+                        notEmpty: {
+                            message: "We need this to contact customer"
+                        },
+                        emailAddress: {
+                            message: 'Please supply a valid email address'
+                        }
+                    }
+                },
+                guests_number: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please supply the number of guests'
+                        }
+                    }
+                },
+                check_in_date: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please supply the check in date'
+                        }
+                    }
+                },
+                check_out_date: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please supply the check out date'
+                        }
+                    }
+                },
+                price: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please supply the total cost'
+                        }
+                    }
+                },
+
                 comment: {
                     validators: {
                         stringLength: {
