@@ -6,7 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Guest;
-use Symfony\Component\Validator\Constraints\DateTime;
+use AppBundle\Entity\Cost;
 
 class KsaController extends Controller
 {
@@ -135,7 +135,7 @@ class KsaController extends Controller
         $revenue = $this->getDoctrine()->getRepository('AppBundle:Guest')->getRevenue();
         $revenue = implode("|", $revenue[0]);
 
-        $total_cost = $this->getDoctrine()->getRepository('AppBundle:Guest')->getTotalCosts();
+        $total_cost = $this->getDoctrine()->getRepository('AppBundle:Cost')->getTotalCosts();
         $total_cost = implode("|", $total_cost[0]);
         $net_profit = $revenue - $total_cost;
 
@@ -160,7 +160,7 @@ class KsaController extends Controller
             $revenue = $this->getDoctrine()->getRepository('AppBundle:Guest')->getRevenue_On_Range($date_in, $date_out);
             $revenue = implode("|", $revenue[0]);
 
-            $cost = $this->getDoctrine()->getRepository('AppBundle:Guest')->getCost_On_Range($date_in, $date_out);
+            $cost = $this->getDoctrine()->getRepository('AppBundle:Cost')->getCost_On_Range($date_in, $date_out);
             $cost = implode("|", $cost[0]);
 
             $profit = $revenue - $cost;
@@ -199,11 +199,9 @@ class KsaController extends Controller
                     'house' => $house_details
                 ));
 
-            }
-            else return $this->render('database/availability.twig', array(
+            } else return $this->render('database/availability.twig', array(
                 'house_unavailable' => $house_unavailable
             ));
-
 
 
         };
@@ -211,4 +209,36 @@ class KsaController extends Controller
         return $this->render('database/availability.twig');
     }
 
+    /**
+     * @Route("/cost", name="cost")
+     *
+     */
+    public function costAction(Request $request)
+    {
+
+        $cost_database = new Cost;
+        if (($request->getMethod() == Request::METHOD_POST)) {
+
+            $cost = $request->request->get('cost');
+            $date = $request->request->get('date');
+            $details = $request->request->get('details');
+            $startDate = date("Y/m/d");
+            $now = new\DateTime($startDate);
+
+
+            $cost_database->setCost($cost);
+            $cost_database->setDate($date);
+            $cost_database->setDetails($details);
+            $cost_database->setCreatedOn($now);
+
+            $em = $this->getDoctrine()->getManager();
+
+            $em->persist($cost_database);
+            $em->flush();
+
+        }
+
+        return $this->render('database/cost.twig');
+
+    }
 }
