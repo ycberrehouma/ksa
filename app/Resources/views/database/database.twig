@@ -13,16 +13,21 @@
             <th>Phone Number</th>
             <th>Email Address</th>
             <th>Guests Number</th>
+            <th>House</th>
             <th>Check In Date</th>
             <th>Check Out Date</th>
             <th>Comment</th>
             <th>Price</th>
+            <th>Cost</th>
             <th>Date Create On</th>
         </tr>
         </thead>
         <tbody>
 
-        <h2 class="page-header">Guest List</h2>
+        <h2 class="page-header">Guest List
+            <a href="revenue-on-range" target="_blank" type="button" class="btn btn-secondary" style="color:white">Date Range</a>
+            <a href="revenue" target="_blank" type="button" class="btn btn-secondary" style="color:white">Total Revenue and Net Profit</a>
+        </h2>
 
 
         {% for guest in guests %}
@@ -35,10 +40,12 @@
                 <td>{{ guest.phoneNumber }}</td>
                 <td>{{ guest.emailAddress }}</td>
                 <td>{{ guest.guestsNumber }}</td>
+                <td>{{ guest.house }}</td>
                 <td>{{ guest.checkInDate|date('F j, Y')  }}</td>
                 <td>{{ guest.checkOutDate|date('F j, Y')  }}</td>
                 <td>{{ guest.comment }}</td>
                 <td>{{ guest.price }}</td>
+                <td>{{ guest.cost }}</td>
                 <td>{{ guest.createdOn|date('F j, Y, g:i a')  }}</td>
             </tr>
         {% endfor %}

@@ -3,40 +3,41 @@
 
 <div class="container" id="container-form">
 
-    <form class="well form-horizontal" action="{{ path('homepage') }}" method="post"  id="contact_form">
+    <form class="well form-horizontal" action="{{ path('homepage') }}" method="post"  id="contact_form" style="direction: rtl;">
         <fieldset>
 
             <!-- Form Name -->
-            <legend>Enter Guest Information</legend>
+            <legend>أدخل معلومات الضيف</legend>
 
-            <a href="homepage"  type="button" class="btn btn-secondary btn-lg " style="left:76%; position:relative">English <span class="glyphicon glyphicon-info-sign"></span></a>
-                <a href="arabic"  type="button" class="btn btn-secondary btn-lg " style="left:76%; position:relative">العربية <span class="glyphicon glyphicon-info-sign"></span></a>
+            <a href="homepage"  type="button" class="btn btn-secondary btn-lg " style="right:76%; position:relative">English <span class="glyphicon glyphicon-info-sign"></span></a>
+            <a href="arabic"  type="button" class="btn btn-secondary btn-lg " style="right:76%; position:relative">العربية <span class="glyphicon glyphicon-info-sign"></span></a>
+
 
 
             <!-- Text input-->
-            <div class="form-group">
-                <label class="col-md-4 control-label">First Name</label>
+            <div class="form-group" style="direction: rtl;" >
+                <label class="col-md-4 control-label"></label>
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input name="first_name" placeholder="First Name" class="form-control" type="text">
+                        <input name="first_name" placeholder="الاسم الاول" class="form-control" type="text">
                     </div>
                 </div>
             </div>
             <!-- Text input-->
             <div class="form-group">
-                <label class="col-md-4 control-label">Last Name</label>
+                <label class="col-md-4 control-label"></label>
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input name="last_name" placeholder="Last Name" class="form-control" type="text">
+                        <input name="last_name" placeholder="اللقب" class="form-control" type="text">
                     </div>
                 </div>
             </div>
 
             <!-- Text input-->
             <div class="form-group">
-                <label class="col-md-4 control-label">Date Of Birth</label>
+                <label class="col-md-4 control-label">تاريخ الولادة</label>
                 <div class="col-md-4 inputGroupContainer">
                     <div class='input-group date' id='datetimepicker1'>
                         <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
@@ -47,14 +48,14 @@
 
             <!-- Text input-->
             <div class="form-group">
-                <label class="col-md-4 control-label">Gender</label>
+                <label class="col-md-4 control-label"></label>
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-transgender"></i></span>
                         <select name="gender" class="form-control selectpicker" >
-                            <option value=" " >Please select the gender</option>
-                            <option value="M">Male</option>
-                            <option value="F">Female</option>
+                            <option value=" " >يرجى تحديد الجنس</option>
+                            <option value="M">الذكر</option>
+                            <option value="F">انثى</option>
                         </select>
                     </div>
                 </div>
@@ -62,45 +63,45 @@
 
             <!-- Text input-->
             <div class="form-group">
-                <label class="col-md-4 control-label">Phone Number</label>
+                <label class="col-md-4 control-label"></label>
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-                        <input name="phone_number" placeholder="Phone Number" class="form-control" type="text">
+                        <input name="phone_number" placeholder="رقم الهاتف" class="form-control" type="text">
                     </div>
                 </div>
             </div>
 
             <!-- Text input-->
             <div class="form-group">
-                <label class="col-md-4 control-label">Email Address</label>
+                <label class="col-md-4 control-label"></label>
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                        <input name="email_address" placeholder="Email Address" class="form-control" type="text">
+                        <input name="email_address" placeholder="عنوان البريد الإلكتروني" class="form-control" type="text">
                     </div>
                 </div>
             </div>
 
             <!-- Text input-->
             <div class="form-group">
-                <label class="col-md-4 control-label">Guests Number</label>
+                <label class="col-md-4 control-label"></label>
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-users"></i></span>
-                        <input name="guests_number" placeholder="Guest Number" class="form-control" type="text">
+                        <input name="guests_number" placeholder="عدد الضيوف" class="form-control" type="text">
                     </div>
                 </div>
             </div>
 
             <!-- Text input-->
             <div class="form-group">
-                <label class="col-md-4 control-label">House Checked</label>
+                <label class="col-md-4 control-label"></label>
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-home"></i></span>
                         <select name="house" class="form-control selectpicker" >
-                            <option value=" " >Which house are they getting</option>
+                            <option value=" " >أي بيت يحصلون عليه</option>
                             <option value="tunis">Tunis</option>
                             <option value="ksa">KSA</option>
                             <option value="usa">USA</option>
@@ -111,10 +112,9 @@
                 </div>
             </div>
 
-
             <!-- Text input-->
             <div class="form-group">
-                <label class="col-md-4 control-label">Check In Date</label>
+                <label class="col-md-4 control-label">تاريخ الدخول</label>
                 <div class="col-md-4 inputGroupContainer">
                     <div class='input-group date' id='datetimepicker1'>
                         <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
@@ -123,11 +123,9 @@
                 </div>
             </div>
 
-
-
             <!-- Text input-->
             <div class="form-group">
-                <label class="col-md-4 control-label">Check Out Date</label>
+                <label class="col-md-4 control-label">تاريخ الخروج</label>
                 <div class="col-md-4 inputGroupContainer">
                     <div class='input-group date' id='datetimepicker1'>
                         <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
@@ -138,34 +136,33 @@
 
             <!-- Text input-->
             <div class="form-group">
-                <label class="col-md-4 control-label">Price</label>
+                <label class="col-md-4 control-label"></label>
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-                        <input name="price" placeholder="price" class="form-control" type="text">
-                    </div>
-                </div>
-            </div>
-
-
-            <!-- Text input-->
-            <div class="form-group">
-                <label class="col-md-4 control-label">Cost</label>
-                <div class="col-md-4 inputGroupContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-                        <input name="cost" placeholder="cost" class="form-control" type="text">
+                        <input name="price" placeholder="السعر" class="form-control" type="text">
                     </div>
                 </div>
             </div>
 
             <!-- Text input-->
             <div class="form-group">
-                <label class="col-md-4 control-label">Comment</label>
+                <label class="col-md-4 control-label"></label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+                        <input name="cost" placeholder="كلفة" class="form-control" type="text">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label"></label>
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                        <input name="comment" placeholder="Comment" class="form-control" type="text">
+                        <input name="comment" placeholder="تعليق" class="form-control" type="text">
                     </div>
                 </div>
             </div>
@@ -184,7 +181,7 @@
             <div class="form-group">
                 <label class="col-md-4 control-label"></label>
                 <div class="col-md-4">
-                    <button type="submit" name="submit" class="btn btn-primary btn-lg btn-block" >Send <span class="glyphicon glyphicon-send"></span></button>
+                    <button type="submit" name="submit" class="btn btn-primary btn-lg btn-block" > أرسل<span class="glyphicon glyphicon-send"></span></button>
                 </div>
             </div>
 
@@ -195,10 +192,10 @@
 
         {% block javascripts %}
 <script>
-    /*$(document).ready(function() {
-       $('#contact_form').bootstrapValidator({
+    $(document).ready(function() {
+        $('#contact_form').bootstrapValidator({
             // To use feedback icons, ensure that you use Bootstrap v3.1.0 or later
-           feedbackIcons: {
+            feedbackIcons: {
                 valid: 'glyphicon glyphicon-ok',
                 invalid: 'glyphicon glyphicon-remove',
                 validating: 'glyphicon glyphicon-refresh'
@@ -321,7 +318,7 @@
                     console.log(result);
                 }, 'json');
             });
-    });*/
+    });
 
 
 </script>

@@ -73,6 +73,13 @@ class Guest
     /**
      * @var \String
      *
+     * @ORM\Column(name="house", type="string", length=35)
+     */
+    private $house;
+
+    /**
+     * @var \String
+     *
      * @ORM\Column(name="check_in_date", type="string", length=35)
      */
     private $checkInDate;
@@ -94,14 +101,22 @@ class Guest
     /**
      * @var string
      *
+     * @ORM\Column(name="cost", type="string", length=255)
+     */
+
+    private $cost;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="comment", type="string", length=255)
      */
     private $comment;
 
     /**
-     * @var \DateTime
+     * @var \Date
      *
-     * @ORM\Column(name="created_on", type="datetime")
+     * @ORM\Column(name="created_on", type="date")
      */
     private $createdOn;
 
@@ -285,6 +300,30 @@ class Guest
     }
 
     /**
+     * Set house
+     *
+     * @param \String $house
+     *
+     * @return Guest
+     */
+    public function setHouse($house)
+    {
+        $this->house = $house;
+
+        return $this;
+    }
+
+    /**
+     * Get house
+     *
+     * @return \String
+     */
+    public function getHouse()
+    {
+        return $this->house;
+    }
+
+    /**
      * Set checkInDate
      *
      * @param \String $checkInDate
@@ -357,6 +396,30 @@ class Guest
     }
 
     /**
+     * Set cost
+     *
+     * @param string $cost
+     *
+     * @return Guest
+     */
+    public function setCost($cost)
+    {
+        $this->cost = $cost;
+
+        return $this;
+    }
+
+    /**
+     * Get cost
+     *
+     * @return string
+     */
+    public function getCost()
+    {
+        return $this->cost;
+    }
+
+    /**
      * Set comment
      *
      * @param string $comment
@@ -383,7 +446,7 @@ class Guest
     /**
      * Set createdOn
      *
-     * @param \DateTime $createdOn
+     * @param \Date $createdOn
      *
      * @return Guest
      */
@@ -397,7 +460,7 @@ class Guest
     /**
      * Get createdOn
      *
-     * @return \DateTime
+     * @return \Date
      */
     public function getCreatedOn()
     {

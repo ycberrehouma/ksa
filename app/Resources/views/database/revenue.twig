@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+  <h2>Total revenue is equal to
+        {{ revenue}}
+        </h2>
+    <h2>Total cost is equal to
+        {{ cost}}
+    </h2>
+    <h2>Your net profit is equal to
+        {{ profit}}
+    </h2>
+    {% block javascripts %}
+
+    {% endblock %}
+{% endblock %}

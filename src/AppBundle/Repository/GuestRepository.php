@@ -10,4 +10,112 @@ namespace AppBundle\Repository;
  */
 class GuestRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getRevenue()
+    {
+
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT SUM(g.price)
+        FROM AppBundle:Guest g'
+        );
+
+        // returns an array of Product objects
+        return $query->getResult();
+    }
+
+    public function getTotalCosts()
+    {
+
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT SUM(g.cost)
+        FROM AppBundle:Guest g'
+        );
+
+        // returns an array of Product objects
+        return $query->getResult();
+    }
+
+    public function getRevenue_On_Range($date_in,$date_out)
+    {
+
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+
+        'SELECT SUM(g.price)
+        FROM AppBundle:Guest g 
+    WHERE g.createdOn BETWEEN  :date_in AND  :date_out'
+        )
+            ->setParameter('date_in', $date_in)
+            ->setParameter('date_out', $date_out);
+
+        // returns an array of Product objects
+        return $query->getResult();
+
+
+    }
+
+    public function getCost_On_Range($date_in,$date_out)
+    {
+
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+
+            'SELECT SUM(g.cost)
+        FROM AppBundle:Guest g 
+    WHERE g.createdOn BETWEEN  :date_in AND  :date_out'
+        )
+            ->setParameter('date_in', $date_in)
+            ->setParameter('date_out', $date_out);
+
+        // returns an array of Product objects
+        return $query->getResult();
+    }
+
+
+    public function checkHouseAvailability($house,$check_in_date,$check_out_date)
+    {
+
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+
+            'SELECT g.house
+        FROM AppBundle:Guest g 
+    WHERE g.checkInDate BETWEEN  :check_in_date AND  :check_out_date
+    AND g.checkOutDate BETWEEN :check_in_date AND :check_out_date
+    AND g.house = :house'
+        )
+            ->setParameter('house', $house)
+            ->setParameter('check_in_date', $check_in_date)
+            ->setParameter('check_out_date', $check_out_date);
+
+        // returns an array of Product objects
+        return $query->getResult();
+    }
+
+    public function fetchHouseDetails($house,$check_in_date,$check_out_date)
+    {
+
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+
+            'SELECT g.id,g.firstName,g.lastName,g.phoneNumber,g.emailAddress,g.checkInDate,g.checkOutDate,g.house
+        FROM AppBundle:Guest g 
+     WHERE g.checkInDate BETWEEN  :check_in_date AND  :check_out_date
+    AND g.checkOutDate BETWEEN :check_in_date AND :check_out_date
+    AND g.house = :house'
+        )
+            ->setParameter('house', $house)
+            ->setParameter('check_in_date', $check_in_date)
+            ->setParameter('check_out_date', $check_out_date);
+
+        // returns an array of Product objects
+        return $query->getResult();
+    }
 }
