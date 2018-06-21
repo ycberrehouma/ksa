@@ -1,0 +1,67 @@
+{% extends 'database.twig' %}
+
+{% block body %}
+
+    <table id="example" class="display" style="width:100%">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Guest Name</th>
+            <th>Card Id</th>
+            <th>Card Date</th>
+            <th>Card Location</th>
+            <th>Gender</th>
+            <th>Phone Number</th>
+            <th>Email Address</th>
+            <th>Guests Number</th>
+            <th>Room Number</th>
+            <th>Check In Date</th>
+            <th>Check Out Date</th>
+            <th>Time In</th>
+            <th>Time Out</th>
+            <th>Comment</th>
+            <th>Price</th>
+            <th>Deposit</th>
+            <th>Date Create On</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <h2 class="page-header">Guest List
+            <a href="revenue-on-range" target="_blank" type="button" class="btn btn-secondary" style="color:white">Date Range</a>
+            <a href="revenue" target="_blank" type="button" class="btn btn-secondary" style="color:white">Total Revenue and Net Profit</a>
+        </h2>
+
+
+        {% for contract in contracts %}
+            <tr>
+                <th scope="row">{{ contract.id }}</th>
+                <td>{{ contract.guestName }}</td>
+                <td>{{ contract.cardId }}</td>
+                <td>{{ contract.cardDate|date('F j, Y')  }}</td>
+                <td>{{ contract.cardLocation }}</td>
+                <td>{{ contract.gender }}</td>
+                <td>{{ contract.phoneNumber }}</td>
+                <td>{{ contract.emailAddress }}</td>
+                <td>{{ contract.guestsNumber }}</td>
+                <td>{{ contract.roomNumber }}</td>
+                <td>{{ contract.checkInDate|date('F j, Y')  }}</td>
+                <td>{{ contract.checkOutDate|date('F j, Y')  }}</td>
+                <td>{{ contract.timeIn|date('g:i')  }}</td>
+                <td>{{ contract.timeOut|date('g:i')  }}</td>
+                <td>{{ contract.comment }}</td>
+                <td>{{ contract.price }}</td>
+                <td>{{ contract.deposit }}</td>
+                <td>{{ contract.createdOn|date('F j, Y, g:i a')  }}</td>
+            </tr>
+        {% endfor %}
+
+
+        </tbody>
+    </table>
+
+
+    {% block javascripts %}
+
+    {% endblock %}
+{% endblock %}

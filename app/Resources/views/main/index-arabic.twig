@@ -1,0 +1,369 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+<div class="container" id="container-form">
+
+    <form class="well form-horizontal" action="{{ path('index-arabic') }}" method="post"  id="contact_form" style="direction: rtl;">
+        <fieldset>
+
+            <!-- Form Name -->
+            <legend>أدخل معلومات الضيف</legend>
+
+            <a href="homepage"  type="button" class="btn btn-secondary btn-lg " style="right:76%; position:relative">English <span class="glyphicon glyphicon-info-sign"></span></a>
+            <a href="arabic"  type="button" class="btn btn-secondary btn-lg " style="right:76%; position:relative">العربية <span class="glyphicon glyphicon-info-sign"></span></a>
+
+
+
+            <!-- Text input-->
+            <div class="form-group" style="direction: rtl;" >
+                <label class="col-md-4 control-label"></label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input name="guest_name" placeholder="اسم المستأجر" class="form-control" type="text">
+                    </div>
+                </div>
+            </div>
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label"></label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input name="card_id" placeholder="رقم الباطقه" class="form-control" type="text">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">تاريخ الباطقه</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class='input-group date' id='datetimepicker1'>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                        <input name="card_date" placeholder="Date Of Birth" type="date" class="form-control" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label"></label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input name="card_location" placeholder="مصدر الباطقه" class="form-control" type="text">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label"></label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-transgender"></i></span>
+                        <select name="gender" class="form-control selectpicker" >
+                            <option value=" " >يرجى تحديد الجنس</option>
+                            <option value="Male">الذكر</option>
+                            <option value="Female">انثى</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label"></label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+                        <input name="phone_number" placeholder="رقم الهاتف" class="form-control" type="text">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label"></label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                        <input name="email_address" placeholder="عنوان البريد الإلكتروني" class="form-control" type="text">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label"></label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-users"></i></span>
+                        <input name="guests_number" placeholder="عدد الضيوف" class="form-control" type="text">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label"></label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-home"></i></span>
+                        <select name="room_number" class="form-control selectpicker" >
+                            <option value=" " >رقم الشالية</option>
+                            <option value="شاليه 1">شاليه 1</option>
+                            <option value="شاليه 2">شاليه 2</option>
+                            <option value="شاليه 3">شاليه 3</option>
+                            <option value="شاليه 4">شاليه 4</option>
+                            <option value="شاليه 5">شاليه 5</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">تاريخ الدخول</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class='input-group date' id='datetimepicker1'>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                        <input name="check_in_date" placeholder="Check In Date" type="date" class="form-control" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">تاريخ الخروج</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class='input-group date' id='datetimepicker1'>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                        <input name="check_out_date" placeholder="Check Out Date" type="date" class="form-control" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">من الساعة</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group clockpicker">
+                        <input name="time_in" type="text" class="form-control" value="09:30">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">الى الساعة</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group clockpicker">
+                        <input name="time_out" type="text" class="form-control" value="09:30">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label"></label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+                        <input name="price" placeholder="قيمة الايجار" class="form-control" type="text">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label"></label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+                        <input name="deposit" placeholder="قيمة التأمين" class="form-control" type="text">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label"></label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                        <input name="comment" placeholder="تعليق" class="form-control" type="text">
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+            <!-- Success message -->
+            <div class="alert alert-success" role="alert" id="success_message">Success <i class="glyphicon glyphicon-thumbs-up"></i> Thanks for contacting us, we will get back to you shortly.</div>
+
+            <!-- Button -->
+            <div class="form-group">
+                <label class="col-md-4 control-label"></label>
+                <div class="col-md-4">
+                    <button type="submit" name="submit" class="btn btn-primary btn-lg btn-block" > أرسل<span class="glyphicon glyphicon-send"></span></button>
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
+
+</div>
+
+        {% block javascripts %}
+<script>
+    $(document).ready(function() {
+        $('#contact_form').bootstrapValidator({
+            // To use feedback icons, ensure that you use Bootstrap v3.1.0 or later
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                first_name: {
+                    validators: {
+                        stringLength: {
+                            min: 2,
+                        },
+                        notEmpty: {
+                            message: "What's the first name?"
+                        }
+                    }
+                },
+
+                last_name: {
+                    validators: {
+                        stringLength: {
+                            min: 2,
+                        },
+                        notEmpty: {
+                            message: "What's the last name?"
+                        }
+                    }
+                },
+                date_of_birth: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please supply the date of birth'
+                        }
+                    }
+                },
+               gender: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please select a gender'
+                        }
+                    }
+                },
+                phone_number: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please supply a phone number'
+                        },
+                        phone: {
+                            country: 'US',
+                            message: 'Please supply a vaild phone number with area code'
+                        }
+                    }
+                },
+                email_address: {
+                    validators: {
+                        notEmpty: {
+                            message: "We need this to contact customer"
+                        },
+                        emailAddress: {
+                            message: 'Please supply a valid email address'
+                        }
+                    }
+                },
+                guests_number: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please supply the number of guests'
+                        }
+                    }
+                },
+                check_in_date: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please supply the check in date'
+                        }
+                    }
+                },
+                check_out_date: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please supply the check out date'
+                        }
+                    }
+                },
+                price: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please supply the total cost'
+                        }
+                    }
+                },
+
+                comment: {
+                    validators: {
+                        stringLength: {
+                            min: 10,
+                            max: 200,
+                            message:'Please enter at least 10 characters and no more than 200'
+                        },
+                        notEmpty: {
+                            message: 'Please supply a description of your project'
+                        }
+                    }
+                }
+            }
+        })
+            .on('success.form.bv', function(e) {
+                $('#success_message').slideDown({ opacity: "show" }, "slow") // Do something ...
+                $('#contact_form').data('bootstrapValidator').resetForm();
+
+                // Prevent form submission
+                e.preventDefault();
+
+                // Get the form instance
+                var $form = $(e.target);
+
+                // Get the BootstrapValidator instance
+                var bv = $form.data('bootstrapValidator');
+
+                // Use Ajax to submit form data
+                $.post($form.attr('action'), $form.serialize(), function(result) {
+                    console.log(result);
+                }, 'json');
+            });
+    });
+
+    $('.clockpicker').clockpicker()
+        .find('input').change(function(){
+        console.log(this.value);
+    });
+
+
+</script>
+        {% endblock %}
+
+{%  endblock %}
