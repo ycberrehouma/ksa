@@ -210,11 +210,11 @@ class KsaController extends Controller
         return $this->render('database/revenue-on-range.twig');
     }
 
-
+/*
     /**
      * @Route("/availability", name="availability")
      */
-    public function availabilityAction(Request $request)
+ /*   public function availabilityAction(Request $request)
     {
 
         if (($request->getMethod() == Request::METHOD_POST)) {
@@ -229,6 +229,38 @@ class KsaController extends Controller
             if (!empty($house_availability)) {
                 $house_availability = implode("|", $house_availability[0]);
                 $house_details = $this->getDoctrine()->getRepository('AppBundle:Guest')->fetchHouseDetails($house, $check_in_date, $check_out_date);
+                return $this->render('database/availability.twig', array(
+                    'house_availability' => $house_availability,
+                    'house' => $house_details
+                ));
+
+            } else return $this->render('database/availability.twig', array(
+                'house_unavailable' => $house_unavailable
+            ));
+
+
+        };
+
+        return $this->render('database/availability.twig');
+    }*/
+    /**
+     * @Route("/availability", name="availability")
+     */
+    public function availabilityAction(Request $request)
+    {
+
+        if (($request->getMethod() == Request::METHOD_POST)) {
+
+            $house = $request->request->get('house');
+            $check_in_date = $request->request->get('check_in_date');
+            $check_out_date = $request->request->get('check_out_date');
+
+            $house_availability = $this->getDoctrine()->getRepository('AppBundle:Contract')->checkHouseAvailability($house, $check_in_date, $check_out_date);
+
+            $house_unavailable = "The selected house is available between those days";
+            if (!empty($house_availability)) {
+                $house_availability = implode("|", $house_availability[0]);
+                $house_details = $this->getDoctrine()->getRepository('AppBundle:Contract')->fetchHouseDetails($house, $check_in_date, $check_out_date);
                 return $this->render('database/availability.twig', array(
                     'house_availability' => $house_availability,
                     'house' => $house_details
