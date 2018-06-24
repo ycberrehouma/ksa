@@ -29,6 +29,13 @@ class Contract
     private $guestName;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="lessor_name", type="string", length=255)
+     */
+    private $lessorName;
+
+    /**
      * @var int
      *
      * @ORM\Column(name="card_id", type="integer")
@@ -173,6 +180,30 @@ class Contract
     public function getGuestName()
     {
         return $this->guestName;
+    }
+
+    /**
+     * Set lessorName
+     *
+     * @param string $lessorName
+     *
+     * @return Contract
+     */
+    public function setLessorName($lessorName)
+    {
+        $this->lessorName = $lessorName;
+
+        return $this;
+    }
+
+    /**
+     * Get lessorName
+     *
+     * @return string
+     */
+    public function getLessorName()
+    {
+        return $this->lessorName;
     }
 
     /**

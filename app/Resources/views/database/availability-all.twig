@@ -1,0 +1,101 @@
+{% extends 'database.twig' %}
+
+{% block body %}
+
+    <div class="container" id="container-form">
+
+<form class="well form-horizontal" action="{{ path('availability-all') }}" method="post"  id="contact_form">
+    <fieldset>
+
+        <!-- Form Name -->
+        <legend>Set a Date Range to find which room is available</legend>
+
+
+
+    <!-- Text input-->
+    <div class="form-group">
+        <label class="col-md-4 control-label">Date In</label>
+        <div class="col-md-4 inputGroupContainer">
+            <div class='input-group date' id='datetimepicker1'>
+                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                <input name="check_in_date" placeholder="Date In" type="date" class="form-control" />
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Text input-->
+    <div class="form-group">
+        <label class="col-md-4 control-label">Date Out</label>
+        <div class="col-md-4 inputGroupContainer">
+            <div class='input-group date' id='datetimepicker1'>
+                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                <input name="check_out_date" placeholder="date_out" type="date" class="form-control" />
+            </div>
+        </div>
+    </div>
+
+        <div class="form-group">
+            <label class="col-md-4 control-label"></label>
+            <div class="col-md-4">
+                <button type="submit" name="submit" class="btn btn-primary btn-lg btn-block" >Send <span class="glyphicon glyphicon-send"></span></button>
+            </div>
+        </div>
+
+    </fieldset>
+</form>
+    </div>
+
+
+{% if house_availability is defined %}
+    <h2>{{ house_availability}} is not available. Here are more details:</h2>
+
+
+
+
+        <table id="example" class="display" style="width:100%">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Guest Name</th>
+                <th>Phone Number</th>
+                <th>Room Number</th>
+                <th>Check In Date</th>
+                <th>Check Out Date</th>
+                <th>Time In</th>
+                <th>Time Out</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for house in house %}
+                <tr>
+                    <th scope="row">{{ house.id }}</th>
+                    <td>{{ house.guestName }}</td>
+                    <td>{{ house.phoneNumber }}</td>
+                    <td>{{ house.roomNumber }}</td>
+                    <td>{{ house.checkInDate|date('F j, Y')  }}</td>
+                    <td>{{ house.checkOutDate|date('F j, Y')  }}</td>
+                    <td>{{ house.timeIn }}</td>
+                    <td>{{ house.timeOut }}</td>
+                </tr>
+            {% endfor %}
+
+
+            </tbody>
+        </table>
+
+
+    {% else %}
+        {% if house_unavailable is defined %}
+
+    <h2>{{ house_unavailable }}</h2>
+    {% endif %}
+
+    {% endif %}
+
+    {% block javascripts %}
+
+    {% endblock %}
+{% endblock %}

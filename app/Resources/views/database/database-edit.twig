@@ -2,8 +2,8 @@
 {% block body %}
 
 <div class="container" id="container-form">
-
-    <form class="well form-horizontal" action="{{ path('index-arabic') }}" method="post"  id="contact_form" style="direction: rtl;">
+    {% for contract in contract %}
+    <form class="well form-horizontal" action="{{ path('database_edit', {'id': contract.id}) }}" method="post"  id="contact_form" style="direction: rtl;">
         <fieldset>
 
             <!-- Form Name -->
@@ -20,7 +20,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input name="guest_name" placeholder="اسم المستأجر" class="form-control" type="text">
+                        <input name="guest_name" value="{{ contract.guestName }}" class="form-control" type="text">
                     </div>
                 </div>
             </div>
@@ -31,7 +31,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input name="lessor_name" placeholder="اسم المؤجر" class="form-control" type="text">
+                        <input name="lessor_name" value="{{ contract.lessorName }}" class="form-control" type="text">
                     </div>
                 </div>
             </div>
@@ -42,7 +42,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon">#</span>
-                        <input name="card_id" placeholder="رقم الباطقه" class="form-control" type="text">
+                        <input name="card_id" value="{{ contract.cardId }}" class="form-control" type="text">
                     </div>
                 </div>
             </div>
@@ -53,7 +53,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class='input-group date' id='datetimepicker1'>
                         <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                        <input name="card_date" placeholder="Date Of Birth" type="date" class="form-control" />
+                        <input name="card_date" value="{{ contract.cardDate }}" type="date" class="form-control" />
                     </div>
                 </div>
             </div>
@@ -64,7 +64,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
-                        <input name="card_location" placeholder="مصدر الباطقه" class="form-control" type="text">
+                        <input name="card_location" value="{{ contract.cardLocation }}" class="form-control" type="text">
                     </div>
                 </div>
             </div>
@@ -76,7 +76,7 @@
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-transgender"></i></span>
                         <select name="gender" class="form-control selectpicker" >
-                            <option value=" " >يرجى تحديد الجنس</option>
+                            <option value=" " >{{ contract.gender }}</option>
                             <option value="Male">الذكر</option>
                             <option value="Female">انثى</option>
                         </select>
@@ -90,7 +90,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-                        <input name="phone_number" placeholder="رقم الهاتف" class="form-control" type="text">
+                        <input name="phone_number" value="{{ contract.phoneNumber }}" class="form-control" type="text">
                     </div>
                 </div>
             </div>
@@ -101,7 +101,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                        <input name="email_address" placeholder="عنوان البريد الإلكتروني" class="form-control" type="text">
+                        <input name="email_address" value="{{ contract.emailAddress }}" class="form-control" type="text">
                     </div>
                 </div>
             </div>
@@ -112,7 +112,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-users"></i></span>
-                        <input name="guests_number" placeholder="عدد الضيوف" class="form-control" type="text">
+                        <input name="guests_number" value="{{ contract.guestsNumber }}" class="form-control" type="text">
                     </div>
                 </div>
             </div>
@@ -124,7 +124,7 @@
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-home"></i></span>
                         <select name="room_number" class="form-control selectpicker" >
-                            <option value=" " >رقم الشالية</option>
+                            <option value=" " >{{ contract.roomNumber }}</option>
                             <option value="شاليه 1">شاليه 1</option>
                             <option value="شاليه 2">شاليه 2</option>
                             <option value="شاليه 3">شاليه 3</option>
@@ -141,7 +141,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class='input-group date' id='datetimepicker1'>
                         <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                        <input name="check_in_date" placeholder="Check In Date" type="date" class="form-control" />
+                        <input name="check_in_date" value="{{ contract.checkInDate }}" type="date" class="form-control" />
                     </div>
                 </div>
             </div>
@@ -152,7 +152,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class='input-group date' id='datetimepicker1'>
                         <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                        <input name="check_out_date" placeholder="Check Out Date" type="date" class="form-control" />
+                        <input name="check_out_date" value="{{ contract.checkOutDate }}" type="date" class="form-control" />
                     </div>
                 </div>
             </div>
@@ -162,7 +162,7 @@
                 <label class="col-md-4 control-label">من الساعة</label>
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group clockpicker">
-                        <input name="time_in" type="text" class="form-control" value="09:30">
+                        <input name="time_in" type="text" class="form-control" value="{{ contract.timeIn }}">
                         <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
                     </div>
                 </div>
@@ -173,7 +173,7 @@
                 <label class="col-md-4 control-label">الى الساعة</label>
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group clockpicker">
-                        <input name="time_out" type="text" class="form-control" value="09:30">
+                        <input name="time_out" type="text" class="form-control" value="{{ contract.timeOut }}">
                         <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
                     </div>
                 </div>
@@ -187,7 +187,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-                        <input name="price" placeholder="قيمة الايجار" class="form-control" type="text">
+                        <input name="price" value="{{ contract.price }}" class="form-control" type="text">
                     </div>
                 </div>
             </div>
@@ -198,7 +198,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-                        <input name="deposit" placeholder="قيمة التأمين" class="form-control" type="text">
+                        <input name="deposit" value="{{ contract.deposit }}" class="form-control" type="text">
                     </div>
                 </div>
             </div>
@@ -209,7 +209,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                        <input name="comment" placeholder="تعليق" class="form-control" type="text">
+                        <input name="comment" value="{{ contract.comment }}" class="form-control" type="text">
                     </div>
                 </div>
             </div>
@@ -230,10 +230,10 @@
             <div class="form-group">
                 <label class="col-md-4 control-label"></label>
                 <div class="col-md-4">
-                    <button type="submit" name="submit" class="btn btn-primary btn-lg btn-block" > أرسل<span class="glyphicon glyphicon-send"></span></button>
+                    <button type="submit" name="submit" class="btn btn-primary btn-lg btn-block" > تصحيح<span class="glyphicon glyphicon-send"></span></button>
                 </div>
             </div>
-
+{% endfor %}
         </fieldset>
     </form>
 

@@ -277,6 +277,39 @@ class KsaController extends Controller
     }
 
     /**
+     * @Route("/availability-all", name="availability-all")
+     */
+    public function availabilityallAction(Request $request)
+    {
+
+        if (($request->getMethod() == Request::METHOD_POST)) {
+
+            //$house = $request->request->get('house');
+            $check_in_date = $request->request->get('check_in_date');
+            $check_out_date = $request->request->get('check_out_date');
+
+            $house_availability = $this->getDoctrine()->getRepository('AppBundle:Contract')->checkDataRangeAvailability($check_in_date, $check_out_date);
+
+            $house_unavailable = "This is a list of the available rooms between those days";
+            if (!empty($house_availability)) {
+                $house_availability = implode("|", $house_availability[0]);
+                $house_details = $this->getDoctrine()->getRepository('AppBundle:Contract')->fetchHouseDetails($house, $check_in_date, $check_out_date);
+                return $this->render('database/availability.twig', array(
+                    'house_availability' => $house_availability,
+                    'house' => $house_details
+                ));
+
+            } else return $this->render('database/availability-all.twig', array(
+                'house_unavailable' => $house_unavailable
+            ));
+
+
+        };
+
+        return $this->render('database/availability-all.twig');
+    }
+
+    /**
      * @Route("/cost", name="cost")
      *
      */
@@ -321,6 +354,7 @@ class KsaController extends Controller
 
             $Contract = new Contract;
             $guest_name = $request->request->get('guest_name');
+            $lessor_name = $request->request->get('lessor_name');
             $card_date = $request->request->get('card_date');
             $card_id = $request->request->get('card_id');
             $card_location = $request->request->get('card_location');
@@ -340,6 +374,7 @@ class KsaController extends Controller
             $now = new\DateTime($startDate);
 
             $Contract->setGuestName($guest_name);
+            $Contract->setLessorName($lessor_name);
             $Contract->setCardId($card_id);
             $Contract->setCardDate($card_date);
             $Contract->setCardLocation($card_location);
@@ -364,6 +399,7 @@ class KsaController extends Controller
 
             return $this->render('database/contract.twig', array(
                 'guest_name' => $guest_name,
+                'lessor_name' => $lessor_name,
                 'card_id' => $card_id,
                 'card_date' => $card_date,
                 'card_location' => $card_location,
@@ -420,4 +456,95 @@ class KsaController extends Controller
 
         return $this->render('main/cost.twig');
     }
+
+    /**
+     * @Route("/database/delete/{id}", name="database_delete")
+     */
+    public function deletesAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('AppBundle:Contract')->find($id);
+
+        $em->remove($entity);
+        $em->flush();
+
+        $this->addFlash(
+            'notice',
+            'Entity Removed');
+
+        return $this->redirectToRoute('database-contract');
+
+    }
+
+    /**
+     * @Route("/database/edit/{id}", name="database_edit")
+     */
+    public function editAction($id, Request $request)
+    {
+
+        $Contract = $this->getDoctrine()
+            ->getRepository('AppBundle:Contract')
+            ->fetchContractInfo($id);
+
+        if ($request->getMethod() == Request::METHOD_POST ) {
+
+
+
+
+            $guest_name = $request->request->get('guest_name');
+            $card_date = $request->request->get('card_date');
+            $card_id = $request->request->get('card_id');
+            $card_location = $request->request->get('card_location');
+            $gender = $request->request->get('gender');
+            $phone_number = $request->request->get('phone_number');
+            $email_address = $request->request->get('email_address');
+            $guests_numbers = $request->request->get('guests_number');
+            $room_number = $request->request->get('room_number');
+            $check_in_date = $request->request->get('check_in_date');
+            $check_out_date = $request->request->get('check_out_date');
+            $time_in = $request->request->get('time_in');
+            $time_out = $request->request->get('time_out');
+            $price = $request->request->get('price');
+            $deposit = $request->request->get('deposit');
+            $comment = $request->request->get('comment');
+
+            $em = $this->getDoctrine()->getManager();
+            $Contract = $em->getRepository('AppBundle:Contract')->findOneBy(['id' => $id]);
+
+
+            $Contract->setGuestName($guest_name);
+            $Contract->setCardId($card_id);
+            $Contract->setCardDate($card_date);
+            $Contract->setCardLocation($card_location);
+            $Contract->setGender($gender);
+            $Contract->setPhoneNumber($phone_number);
+            $Contract->setEmailAddress($email_address);
+            $Contract->setGuestsNumber($guests_numbers);
+            $Contract->setRoomNumber($room_number);
+            $Contract->setCheckInDate($check_in_date);
+            $Contract->setCheckOutDate($check_out_date);
+            $Contract->setTimeIn($time_in);
+            $Contract->setTimeOut($time_out);
+            $Contract->setPrice($price);
+            $Contract->setDeposit($deposit);
+            $Contract->setComment($comment);
+
+            $em = $this->getDoctrine()->getManager();
+
+            $em->persist($Contract);
+            $em->flush();
+            $this->addFlash(
+                'notice',
+                'Entity edited');
+
+
+
+            return $this->redirectToRoute('database-contract');
+        }
+
+        return $this->render('database/database-edit.twig',array(
+            'contract' => $Contract,
+        ));
+    }
+
 }

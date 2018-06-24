@@ -7,6 +7,7 @@
         <tr>
             <th>#</th>
             <th>Guest Name</th>
+            <th>Lessor Name</th>
             <th>Card Id</th>
             <th>Card Date</th>
             <th>Card Location</th>
@@ -23,6 +24,9 @@
             <th>Price</th>
             <th>Deposit</th>
             <th>Date Create On</th>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+           <!-- <th>&nbsp;</th>-->
         </tr>
         </thead>
         <tbody>
@@ -37,6 +41,7 @@
             <tr>
                 <th scope="row">{{ contract.id }}</th>
                 <td>{{ contract.guestName }}</td>
+                <td>{{ contract.lessorName }}</td>
                 <td>{{ contract.cardId }}</td>
                 <td>{{ contract.cardDate|date('F j, Y')  }}</td>
                 <td>{{ contract.cardLocation }}</td>
@@ -52,7 +57,12 @@
                 <td>{{ contract.comment }}</td>
                 <td>{{ contract.price }}</td>
                 <td>{{ contract.deposit }}</td>
-                <td>{{ contract.createdOn|date('F j, Y, g:i a')  }}</td>
+                <td>{{ contract.createdOn|date('F j, Y')  }}</td>
+               <!-- <td><a href="" class="btn btn-success" title="View task">View</a></td>-->
+                <td><a href="{{ path('database_edit', {'id': contract.id}) }}" class="btn btn-primary" title="Edit task">Edit</a></td>
+                <td><a href="{{ path('database_delete', {'id': contract.id}) }}" class="btn btn-danger" title="Delete task">Delete</a></td>
+
+
             </tr>
         {% endfor %}
 
