@@ -1,4 +1,4 @@
-{% extends 'database.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block body %}
 
@@ -48,52 +48,17 @@
     </div>
 
 
-{% if house_availability is defined %}
-    <h2>{{ house_availability}} is not available. Here are more details:</h2>
 
 
+        {% if rooms is defined %}
+    <h2>Here is a list of the available rooms in the selected date range:</h2>
 
-
-        <table id="example" class="display" style="width:100%">
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>Guest Name</th>
-                <th>Phone Number</th>
-                <th>Room Number</th>
-                <th>Check In Date</th>
-                <th>Check Out Date</th>
-                <th>Time In</th>
-                <th>Time Out</th>
-            </tr>
-            </thead>
-            <tbody>
-
-            {% for house in house %}
-                <tr>
-                    <th scope="row">{{ house.id }}</th>
-                    <td>{{ house.guestName }}</td>
-                    <td>{{ house.phoneNumber }}</td>
-                    <td>{{ house.roomNumber }}</td>
-                    <td>{{ house.checkInDate|date('F j, Y')  }}</td>
-                    <td>{{ house.checkOutDate|date('F j, Y')  }}</td>
-                    <td>{{ house.timeIn }}</td>
-                    <td>{{ house.timeOut }}</td>
-                </tr>
-            {% endfor %}
-
-
-            </tbody>
-        </table>
-
-
-    {% else %}
-        {% if house_unavailable is defined %}
-
-    <h2>{{ house_unavailable }}</h2>
-    {% endif %}
-
-    {% endif %}
+            {% for rooms in rooms  %}
+<ul>
+    <li> {{ rooms }}</li>
+</ul>
+                {% endfor %}
+{% endif %}
 
     {% block javascripts %}
 

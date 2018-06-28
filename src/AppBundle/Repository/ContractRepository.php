@@ -104,20 +104,19 @@ class ContractRepository extends \Doctrine\ORM\EntityRepository
         return $query->getResult();
     }
 
-    public function fetchHouseDetails($house,$check_in_date,$check_out_date)
+    public function fetchHouseDetails($check_in_date,$check_out_date)
     {
 
         $entityManager = $this->getEntityManager();
 
         $query = $entityManager->createQuery(
 
-            'SELECT c.id,c.guestName,c.phoneNumber, c.checkInDate,c.checkOutDate,c.roomNumber,c.timeIn,c.timeOut
+            'SELECT c.roomNumber
         FROM AppBundle:Contract c 
      WHERE c.checkInDate BETWEEN  :check_in_date AND  :check_out_date
-    AND c.checkOutDate BETWEEN :check_in_date AND :check_out_date
-    AND c.roomNumber = :house'
+    AND c.checkOutDate BETWEEN :check_in_date AND :check_out_date'
         )
-            ->setParameter('house', $house)
+
             ->setParameter('check_in_date', $check_in_date)
             ->setParameter('check_out_date', $check_out_date);
 

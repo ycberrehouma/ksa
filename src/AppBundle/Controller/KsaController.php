@@ -288,23 +288,30 @@ class KsaController extends Controller
             $check_in_date = $request->request->get('check_in_date');
             $check_out_date = $request->request->get('check_out_date');
 
-            $house_availability = $this->getDoctrine()->getRepository('AppBundle:Contract')->checkDataRangeAvailability($check_in_date, $check_out_date);
-
-            $house_unavailable = "This is a list of the available rooms between those days";
+            $house_availability = $this->getDoctrine()->getRepository('AppBundle:Contract')->checkDateRangeAvailability($check_in_date, $check_out_date);
+            $house_details = $this->getDoctrine()->getRepository('AppBundle:Contract')->fetchHouseDetails($check_in_date, $check_out_date);
+            $rooms = array();
             if (!empty($house_availability)) {
-                $house_availability = implode("|", $house_availability[0]);
-                $house_details = $this->getDoctrine()->getRepository('AppBundle:Contract')->fetchHouseDetails($house, $check_in_date, $check_out_date);
-                return $this->render('database/availability.twig', array(
-                    'house_availability' => $house_availability,
-                    'house' => $house_details
-                ));
+                    $length = count($house_details);
+                    for ($i = 0; $i < $length; $i++) {
+                        $test = implode("|", $house_details[0]);
+                       // echo $house_details;
+                        if ($test == "شاليه 3") {
+                            // $available = "شاليه 3";
+                            $rooms[] = "شاليه 3";
+                        }
+                        if ($test == "شاليه 2") {
+                            $rooms[] = "شاليه 2";
+                        }
+                    }
+                        return $this->render('database/availability-all.twig', array(
+                            'rooms' => $rooms
+                        ));
 
-            } else return $this->render('database/availability-all.twig', array(
-                'house_unavailable' => $house_unavailable
-            ));
+                }
 
+            }
 
-        };
 
         return $this->render('database/availability-all.twig');
     }

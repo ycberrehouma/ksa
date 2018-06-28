@@ -28,12 +28,40 @@
     <body>
 
 
+            <nav class="navbar navbar-inverse">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="index-arabic">Home</a>
+                    </div>
+                    <ul class="nav navbar-nav">
+                        <li><a href="cost">Cost</a></li>
+                        <li><a href="availability">Availability by date</a></li>
+                        <li><a href="availability-all">Availability by room and date</a></li>
+                        <li><a href="revenue">Revenue</a></li>
+                        <li><a href="revenue-on-range">Revenue On Range</a></li>
+                        <li><a href="database-contract">database</a></li>
+                    </ul>
+                </div>
+            </nav>
 
-        {% block body %}
+
+            <main role="main" class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        {% for flash_message in app.session.flashbag.get('notice') %}
+                            <div class="alert alert-success"> {{flash_message}}</div>
+                        {% endfor %}
 
 
-        {% endblock %}
+                        {% for flash_message in app.session.flashbag.get('error') %}
+                            <div class="alert alert-danger"> {{flash_message}}</div>
+                        {% endfor %}
+                        {% block body%}{% endblock %}
+                    </div>
+                </div>
 
+
+            </main><!-- /.container -->
 
         <!-- Latest compiled and minified JavaScript -->
         <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
