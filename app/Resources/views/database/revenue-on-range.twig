@@ -42,29 +42,29 @@
                 <button type="submit" name="submit" class="btn btn-primary btn-lg btn-block" >Send <span class="glyphicon glyphicon-send"></span></button>
             </div>
         </div>
+{% if revenue is defined %}
+    <h2>Total revenue is equal to
+        {{ revenue}}
+    </h2>
+{% endif %}
 
+        {% if cost is defined %}
+            <h2>Total cost is equal to
+                {{ cost}}
+            </h2>
+        {% endif %}
+
+        {% if profit is defined %}
+            <h2>Total profit is equal to
+                {{ profit}}
+            </h2>
+        {% endif %}
     </fieldset>
 </form>
     </div>
 
 
-{% if revenue is defined %}
-  <h2>Total revenue is equal to
-        {{ revenue}}
-        </h2>
-    {% endif %}
 
-    {% if cost is defined %}
-        <h2>Total cost is equal to
-            {{ cost}}
-        </h2>
-    {% endif %}
-
-    {% if profit is defined %}
-        <h2>Total profit is equal to
-            {{ profit}}
-        </h2>
-    {% endif %}
 
 
 

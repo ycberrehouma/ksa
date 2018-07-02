@@ -210,39 +210,6 @@ class KsaController extends Controller
         return $this->render('database/revenue-on-range.twig');
     }
 
-/*
-    /**
-     * @Route("/availability", name="availability")
-     */
- /*   public function availabilityAction(Request $request)
-    {
-
-        if (($request->getMethod() == Request::METHOD_POST)) {
-
-            $house = $request->request->get('house');
-            $check_in_date = $request->request->get('check_in_date');
-            $check_out_date = $request->request->get('check_out_date');
-
-            $house_availability = $this->getDoctrine()->getRepository('AppBundle:Guest')->checkHouseAvailability($house, $check_in_date, $check_out_date);
-
-            $house_unavailable = "The selected house is available between those days";
-            if (!empty($house_availability)) {
-                $house_availability = implode("|", $house_availability[0]);
-                $house_details = $this->getDoctrine()->getRepository('AppBundle:Guest')->fetchHouseDetails($house, $check_in_date, $check_out_date);
-                return $this->render('database/availability.twig', array(
-                    'house_availability' => $house_availability,
-                    'house' => $house_details
-                ));
-
-            } else return $this->render('database/availability.twig', array(
-                'house_unavailable' => $house_unavailable
-            ));
-
-
-        };
-
-        return $this->render('database/availability.twig');
-    }*/
     /**
      * @Route("/availability", name="availability")
      */
@@ -251,16 +218,16 @@ class KsaController extends Controller
 
         if (($request->getMethod() == Request::METHOD_POST)) {
 
-            $house = $request->request->get('house');
+            $room = $request->request->get('room');
             $check_in_date = $request->request->get('check_in_date');
             $check_out_date = $request->request->get('check_out_date');
 
-            $house_availability = $this->getDoctrine()->getRepository('AppBundle:Contract')->checkHouseAvailability($house, $check_in_date, $check_out_date);
+            $house_availability = $this->getDoctrine()->getRepository('AppBundle:Contract')->checkHouseAvailability($room, $check_in_date, $check_out_date);
 
             $house_unavailable = "The selected house is available between those days";
             if (!empty($house_availability)) {
                 $house_availability = implode("|", $house_availability[0]);
-                $house_details = $this->getDoctrine()->getRepository('AppBundle:Contract')->fetchHouseDetails($house, $check_in_date, $check_out_date);
+                $house_details = $this->getDoctrine()->getRepository('AppBundle:Contract')->fetchRoomDetails($room, $check_in_date, $check_out_date);
                 return $this->render('database/availability.twig', array(
                     'house_availability' => $house_availability,
                     'house' => $house_details
@@ -284,28 +251,25 @@ class KsaController extends Controller
 
         if (($request->getMethod() == Request::METHOD_POST)) {
 
-            //$house = $request->request->get('house');
+
             $check_in_date = $request->request->get('check_in_date');
             $check_out_date = $request->request->get('check_out_date');
 
             $house_availability = $this->getDoctrine()->getRepository('AppBundle:Contract')->checkDateRangeAvailability($check_in_date, $check_out_date);
-            $house_details = $this->getDoctrine()->getRepository('AppBundle:Contract')->fetchHouseDetails($check_in_date, $check_out_date);
-            $rooms = array();
+            $house_details = $this->getDoctrine()->getRepository('AppBundle:Contract')->fetchRooms($check_in_date, $check_out_date);
+
+           $rooms = array();
             if (!empty($house_availability)) {
                     $length = count($house_details);
                     for ($i = 0; $i < $length; $i++) {
-                        $test = implode("|", $house_details[0]);
-                       // echo $house_details;
-                        if ($test == "شاليه 3") {
-                            // $available = "شاليه 3";
-                            $rooms[] = "شاليه 3";
-                        }
-                        if ($test == "شاليه 2") {
-                            $rooms[] = "شاليه 2";
-                        }
+                        $room = implode("|", $house_details[$i]);
+                            $rooms[] = $room;
                     }
+                $rooms= array_unique($rooms);
                         return $this->render('database/availability-all.twig', array(
-                            'rooms' => $rooms
+                            'rooms' => $rooms,
+                            'check_in_date' =>$check_in_date,
+                            'check_out_date' =>$check_out_date
                         ));
 
                 }
@@ -458,10 +422,90 @@ class KsaController extends Controller
             $em->persist($Cost);
             $em->flush();
 
-            return $this->redirectToRoute('cost-input');
+            return $this->redirectToRoute('cost-database');
         }
 
         return $this->render('main/cost.twig');
+    }
+
+
+    /**
+     * @Route("/cost-database", name="cost-database")
+     */
+    public function costdatabaseAction(Request $request)
+    {
+
+        $cost = $this->getDoctrine()
+            ->getRepository('AppBundle:Cost')
+            ->findAll();
+
+        return $this->render('database/cost-database.twig', array(
+            'cost' => $cost
+        ));
+    }
+
+    /**
+     * @Route("/cost/delete/{id}", name="cost_delete")
+     */
+    public function costdeletesAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('AppBundle:Cost')->find($id);
+
+        $em->remove($entity);
+        $em->flush();
+
+        $this->addFlash(
+            'notice',
+            'Entity Removed');
+
+        return $this->redirectToRoute('cost-database');
+
+    }
+
+    /**
+     * @Route("/cost/edit/{id}", name="cost_edit")
+     */
+    public function costeditAction($id, Request $request)
+    {
+
+        $Cost = $this->getDoctrine()
+            ->getRepository('AppBundle:Cost')
+            ->fetchCostInfo($id);
+
+        if ($request->getMethod() == Request::METHOD_POST ) {
+
+
+
+
+            $cost = $request->request->get('cost');
+            $date = $request->request->get('date');
+            $details = $request->request->get('details');
+
+            $em = $this->getDoctrine()->getManager();
+            $Cost = $em->getRepository('AppBundle:Cost')->findOneBy(['id' => $id]);
+
+
+            $Cost->setCost($cost);
+            $Cost->setDetails($details);
+            $Cost->setDate($date);
+
+            $em = $this->getDoctrine()->getManager();
+
+            $em->persist($Cost);
+            $em->flush();
+            $this->addFlash(
+                'notice',
+                'Entity edited');
+
+
+
+            return $this->redirectToRoute('cost-database');
+        }
+
+        return $this->render('database/cost-edit.twig',array(
+            'cost' => $Cost,
+        ));
     }
 
     /**

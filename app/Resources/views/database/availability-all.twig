@@ -42,7 +42,15 @@
                 <button type="submit" name="submit" class="btn btn-primary btn-lg btn-block" >Send <span class="glyphicon glyphicon-send"></span></button>
             </div>
         </div>
+        {% if rooms is defined %}
+            <h4>Those rooms are booked already and not available in the selected date range:  {{ check_in_date }} - {{ check_out_date }} </h4>
 
+            {% for rooms in rooms  %}
+                <ul>
+                    <li> {{ rooms}}</li>
+                </ul>
+            {% endfor %}
+        {% endif %}
     </fieldset>
 </form>
     </div>
@@ -50,15 +58,7 @@
 
 
 
-        {% if rooms is defined %}
-    <h2>Here is a list of the available rooms in the selected date range:</h2>
 
-            {% for rooms in rooms  %}
-<ul>
-    <li> {{ rooms }}</li>
-</ul>
-                {% endfor %}
-{% endif %}
 
     {% block javascripts %}
 

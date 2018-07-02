@@ -11,6 +11,24 @@ namespace AppBundle\Repository;
 class CostRepository extends \Doctrine\ORM\EntityRepository
 {
 
+    public function fetchCostInfo($id)
+    {
+
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT c
+        FROM AppBundle:Cost c
+        WHERE c.id = :id'
+        )
+            ->setParameter('id', $id);
+
+        // returns an array of Product objects
+        return $query->getResult();
+
+
+    }
+
     public function getTotalCosts()
     {
 
@@ -44,4 +62,6 @@ class CostRepository extends \Doctrine\ORM\EntityRepository
         // returns an array of Product objects
         return $query->getResult();
     }
+
+
 }

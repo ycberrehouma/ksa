@@ -1,0 +1,49 @@
+{% extends 'database.twig' %}
+
+{% block body %}
+
+    <table id="example" class="display" style="width:100%">
+        <thead>
+        <tr>
+            <th>#</th>
+           <th>cost</th>
+            <th>Date</th>
+            <th>Details</th>
+            <th>Date Create On</th>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+           <!-- <th>&nbsp;</th>-->
+        </tr>
+        </thead>
+        <tbody>
+
+        <h2 class="page-header">Cost Database
+            <a href="revenue-on-range" target="_blank" type="button" class="btn btn-secondary" style="color:white">Date Range</a>
+            <a href="revenue" target="_blank" type="button" class="btn btn-secondary" style="color:white">Total Revenue and Net Profit</a>
+        </h2>
+
+
+        {% for cost in cost %}
+            <tr>
+                <th scope="row">{{ cost.id }}</th>
+                <td>{{ cost.cost }}</td>
+                <td>{{ cost.date|date('F j, Y')  }}</td>
+                <td>{{ cost.details }}</td>
+                <td>{{ cost.createdOn|date('F j, Y')  }}</td>
+               <!-- <td><a href="" class="btn btn-success" title="View task">View</a></td>-->
+                <td><a href="{{ path('cost_edit', {'id': cost.id}) }}" class="btn btn-primary" title="Edit task">Edit</a></td>
+                <td><a href="{{ path('cost_delete', {'id': cost.id}) }}" class="btn btn-danger" title="Delete task">Delete</a></td>
+
+
+            </tr>
+        {% endfor %}
+
+
+        </tbody>
+    </table>
+
+
+    {% block javascripts %}
+
+    {% endblock %}
+{% endblock %}
